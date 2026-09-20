@@ -836,6 +836,99 @@ footer p{
     margin-top:8px;
 }
 
+/* =========================================================
+   DOCUMENT DOWNLOADS
+   ========================================================= */
+
+.downloads {
+  padding: 100px 24px;
+  border-top: 1px solid #ddd;
+}
+
+.downloads-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.downloads .section-label {
+  margin-bottom: 16px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.downloads h2 {
+  max-width: 800px;
+  margin-bottom: 20px;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.downloads-description {
+  max-width: 760px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.downloads-note {
+  max-width: 760px;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.65;
+}
+
+.download-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.download-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  min-width: 260px;
+  padding: 20px 24px;
+
+  border: 1px solid currentColor;
+  color: inherit;
+
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.download-btn span {
+  font-size: 0.72rem;
+  font-weight: 400;
+  opacity: 0.65;
+}
+
+.download-btn:hover {
+  background: #111;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .download-buttons {
+    flex-direction: column;
+  }
+
+  .download-btn {
+    width: 100%;
+  }
+}
+
 /* RESPONSIVE */
 
 @media(max-width:950px){
@@ -2425,6 +2518,51 @@ footer p{
 </div>
 
 </div>
+</section>
+
+<section class="downloads" id="documentation">
+  <div class="downloads-container">
+
+    <p class="section-label">TECHNICAL DOCUMENTATION</p>
+
+    <h2>OpenOps Backend Architecture</h2>
+
+    <p class="downloads-description">
+      Download the OpenOps backend architecture document for a detailed
+      explanation of the platform's data model, integrations, event system,
+      workflows, automation, operational database, open historical data layer,
+      Apache Iceberg architecture, analytics, and AI framework.
+    </p>
+
+    <p class="downloads-note">
+      (These documents provide the technical concept and backend framework
+      for developers, technical partners, and others evaluating how the
+      OpenOps platform is designed.)
+    </p>
+
+    <div class="download-buttons">
+
+      <a
+        href="DOCS/OpenOps%20Backend.pdf"
+        class="download-btn"
+        download
+      >
+        DOWNLOAD PDF
+        <span>OpenOps Backend.pdf</span>
+      </a>
+
+      <a
+        href="DOCS/OpenOps%20Backend.docx"
+        class="download-btn"
+        download
+      >
+        DOWNLOAD WORD DOCUMENT
+        <span>OpenOps Backend.docx</span>
+      </a>
+
+    </div>
+
+  </div>
 </section>
 
 </main>
