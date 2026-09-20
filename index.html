@@ -1,0 +1,2553 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OpenOps — Connected Business Operations Platform</title>
+
+<style>
+:root{
+    --bg:#f6f7f9;
+    --surface:#ffffff;
+    --dark:#101216;
+    --dark2:#181b20;
+    --text:#17191d;
+    --muted:#69707a;
+    --border:#e1e4e8;
+    --soft:#f0f2f4;
+    --green:#18794e;
+    --green-bg:#edf8f2;
+    --orange:#9a5b00;
+    --orange-bg:#fff7e8;
+    --blue:#245fbd;
+    --blue-bg:#eef5ff;
+    --red:#a13a3a;
+    --red-bg:#fff0f0;
+    --radius:18px;
+    --max:1200px;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,input{
+    font:inherit;
+}
+
+.container{
+    width:min(92%,var(--max));
+    margin:auto;
+}
+
+.note{
+    margin-top:10px;
+    color:var(--muted);
+    font-size:.82rem;
+    font-style:italic;
+}
+
+.eyebrow{
+    display:inline-block;
+    padding:7px 11px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:white;
+    font-size:.72rem;
+    font-weight:900;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    margin-bottom:22px;
+}
+
+section{
+    padding:95px 0;
+}
+
+.section-heading{
+    max-width:820px;
+    margin-bottom:45px;
+}
+
+.section-heading h2{
+    font-size:clamp(2.3rem,4vw,4.2rem);
+    line-height:1;
+    letter-spacing:-.055em;
+}
+
+.section-heading p{
+    margin-top:18px;
+    color:var(--muted);
+    font-size:1.05rem;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav{
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.logo{
+    font-size:1.2rem;
+    font-weight:900;
+    letter-spacing:-.04em;
+}
+
+.logo span{
+    color:var(--muted);
+    font-weight:400;
+}
+
+nav{
+    display:flex;
+    gap:22px;
+    align-items:center;
+    font-size:.85rem;
+}
+
+nav a:hover{
+    opacity:.55;
+}
+
+.button,
+.nav-button{
+    border:0;
+    border-radius:10px;
+    padding:12px 17px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.primary,
+.nav-button{
+    background:var(--dark);
+    color:white;
+}
+
+.secondary{
+    background:white;
+    border:1px solid var(--border);
+}
+
+/* HERO */
+
+.hero{
+    padding:115px 0 90px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.08fr .92fr;
+    gap:65px;
+    align-items:center;
+}
+
+h1{
+    font-size:clamp(3rem,6vw,5.8rem);
+    line-height:.94;
+    letter-spacing:-.065em;
+}
+
+.hero-copy{
+    margin-top:27px;
+    max-width:690px;
+    color:var(--muted);
+    font-size:1.12rem;
+}
+
+.hero-actions{
+    display:flex;
+    gap:10px;
+    margin-top:28px;
+}
+
+.dashboard{
+    background:var(--dark);
+    color:white;
+    border-radius:26px;
+    padding:23px;
+    box-shadow:0 35px 80px rgba(0,0,0,.18);
+}
+
+.dashboard-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.status{
+    color:#9ce2bb;
+    font-size:.78rem;
+}
+
+.metric-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.metric{
+    background:#1b1e23;
+    border:1px solid #2b2e34;
+    border-radius:13px;
+    padding:19px;
+}
+
+.metric small{
+    color:#969ca6;
+}
+
+.metric strong{
+    display:block;
+    margin-top:5px;
+    font-size:1.45rem;
+}
+
+.activity{
+    margin-top:12px;
+    background:white;
+    color:var(--text);
+    border-radius:13px;
+    padding:19px;
+}
+
+.activity-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:11px 0;
+    border-bottom:1px solid var(--border);
+    font-size:.84rem;
+}
+
+.activity-row:last-child{
+    border-bottom:0;
+}
+
+/* EXPLANATION BOX */
+
+.explain{
+    margin-top:25px;
+    padding:23px;
+    background:var(--soft);
+    border-left:4px solid var(--dark);
+    border-radius:0 12px 12px 0;
+}
+
+.explain.dark{
+    background:#1b1e23;
+    border-left-color:white;
+}
+
+.label{
+    display:block;
+    margin-bottom:8px;
+    font-size:.7rem;
+    font-weight:900;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+}
+
+.explain p{
+    color:#5f6670;
+    font-size:.9rem;
+}
+
+.explain.dark p{
+    color:#aeb4bd;
+}
+
+.explain .note{
+    font-size:.78rem;
+}
+
+/* MASTER ARCHITECTURE */
+
+.architecture-section{
+    background:white;
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+.source-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:9px;
+}
+
+.source{
+    padding:16px 10px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    text-align:center;
+    font-size:.78rem;
+    font-weight:800;
+}
+
+.down{
+    text-align:center;
+    font-size:1.8rem;
+    margin:22px 0;
+}
+
+.layer{
+    padding:30px;
+    border-radius:17px;
+    margin-bottom:12px;
+}
+
+.layer.dark{
+    background:var(--dark);
+    color:white;
+}
+
+.layer.white{
+    background:white;
+    border:1px solid var(--border);
+}
+
+.layer.soft{
+    background:var(--soft);
+}
+
+.layer h3{
+    margin-bottom:8px;
+}
+
+.layer > p{
+    color:var(--muted);
+}
+
+.layer.dark > p{
+    color:#aeb4bd;
+}
+
+.chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:18px;
+}
+
+.chip{
+    padding:8px 11px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:white;
+    font-size:.76rem;
+    font-weight:700;
+    color:var(--text);
+}
+
+.layer.dark .chip{
+    background:#1d2025;
+    border-color:#30343a;
+    color:#ddd;
+}
+
+/* IDENTITY */
+
+.identity{
+    display:grid;
+    grid-template-columns:1fr 80px 1fr;
+    gap:20px;
+    align-items:center;
+    margin-top:35px;
+}
+
+.identity-box{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:25px;
+}
+
+.identity-box.dark{
+    background:var(--dark);
+    color:white;
+    border-color:var(--dark);
+}
+
+.identity-record{
+    padding:11px 0;
+    border-bottom:1px solid var(--border);
+    font-size:.87rem;
+}
+
+.identity-record:last-child{
+    border-bottom:0;
+}
+
+/* IMPLEMENTATION INPUTS */
+
+.records-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.record-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:23px;
+}
+
+.record-card h3{
+    margin-bottom:12px;
+}
+
+.record-card ul{
+    padding-left:18px;
+    color:var(--muted);
+    font-size:.86rem;
+}
+
+.discovery{
+    margin-top:35px;
+    padding:35px;
+    background:var(--dark);
+    color:white;
+    border-radius:20px;
+}
+
+.discovery h3{
+    font-size:1.6rem;
+}
+
+.discovery p{
+    color:#aeb4bd;
+    margin-top:8px;
+}
+
+.discovery-flow{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:9px;
+    margin-top:25px;
+}
+
+.discovery-item{
+    padding:17px;
+    border:1px solid #30343a;
+    background:#1a1d22;
+    border-radius:11px;
+    font-size:.8rem;
+}
+
+/* MODULE DETAIL */
+
+.module{
+    border-top:1px solid var(--border);
+}
+
+.module:nth-of-type(even){
+    background:white;
+}
+
+.module-header{
+    display:grid;
+    grid-template-columns:.7fr 1.3fr;
+    gap:50px;
+    margin-bottom:40px;
+}
+
+.module-number{
+    font-size:.75rem;
+    font-weight:900;
+    color:var(--muted);
+    letter-spacing:.08em;
+}
+
+.module-header h2{
+    margin-top:10px;
+    font-size:clamp(2.3rem,4vw,4rem);
+    line-height:1;
+    letter-spacing:-.05em;
+}
+
+.module-summary{
+    color:var(--muted);
+    font-size:1rem;
+}
+
+.mechanism{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.mechanism-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:21px;
+}
+
+.module:nth-of-type(even) .mechanism-card{
+    background:var(--bg);
+}
+
+.mechanism-card small{
+    display:block;
+    color:var(--muted);
+    font-size:.67rem;
+    font-weight:900;
+    letter-spacing:.08em;
+    margin-bottom:10px;
+}
+
+.mechanism-card h3{
+    font-size:1rem;
+    margin-bottom:7px;
+}
+
+.mechanism-card p{
+    color:var(--muted);
+    font-size:.82rem;
+}
+
+/* FLOW */
+
+.flow{
+    display:flex;
+    gap:7px;
+    align-items:stretch;
+    overflow-x:auto;
+    padding:8px 0 12px;
+    margin-top:30px;
+}
+
+.flow-node{
+    min-width:125px;
+    flex:1;
+    padding:17px 12px;
+    border-radius:11px;
+    background:var(--dark);
+    color:white;
+    text-align:center;
+    font-size:.74rem;
+    font-weight:800;
+}
+
+.flow-arrow{
+    display:flex;
+    align-items:center;
+    color:var(--muted);
+}
+
+/* EXAMPLE */
+
+.example{
+    margin-top:30px;
+    border:1px solid var(--border);
+    background:white;
+    border-radius:17px;
+    padding:28px;
+}
+
+.example h3{
+    margin-bottom:16px;
+}
+
+.example-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.example-box{
+    background:var(--soft);
+    border-radius:11px;
+    padding:18px;
+}
+
+.example-box small{
+    color:var(--muted);
+}
+
+.example-box strong{
+    display:block;
+    margin-top:5px;
+}
+
+.exception{
+    margin-top:15px;
+    padding:18px;
+    background:var(--orange-bg);
+    border:1px solid #eed9b5;
+    border-radius:11px;
+    color:#68430b;
+}
+
+/* HUMAN CONTROL */
+
+.control{
+    margin-top:25px;
+    padding:27px;
+    background:var(--green-bg);
+    border-radius:15px;
+}
+
+.control h3{
+    color:var(--green);
+}
+
+.control p{
+    margin-top:7px;
+}
+
+/* EVENTS */
+
+.events{
+    margin-top:28px;
+    padding:25px;
+    background:#111316;
+    color:white;
+    border-radius:15px;
+}
+
+.events h3{
+    margin-bottom:13px;
+}
+
+.event-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.event{
+    padding:7px 9px;
+    background:#1d2025;
+    border:1px solid #30343a;
+    border-radius:7px;
+    color:#b8bec7;
+    font-family:monospace;
+    font-size:.72rem;
+}
+
+/* AUTOMATION */
+
+.automation{
+    background:#111316;
+    color:white;
+}
+
+.automation .section-heading p{
+    color:#aeb4bd;
+}
+
+.rule{
+    display:grid;
+    grid-template-columns:1fr 55px 1fr 55px 1fr;
+    gap:8px;
+    align-items:center;
+}
+
+.rule-box{
+    min-height:150px;
+    padding:24px;
+    background:#1b1e23;
+    border:1px solid #2e3238;
+    border-radius:14px;
+}
+
+.rule-box small{
+    color:#8f97a1;
+}
+
+.rule-box strong{
+    display:block;
+    margin-top:8px;
+}
+
+.rule-arrow{
+    text-align:center;
+    font-size:1.5rem;
+}
+
+/* OPEN DATA */
+
+.open-architecture{
+    display:grid;
+    grid-template-columns:1fr 60px 1fr 60px 1fr;
+    gap:10px;
+    align-items:center;
+}
+
+.open-box{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:26px;
+    min-height:200px;
+}
+
+.open-box p{
+    margin-top:10px;
+    color:var(--muted);
+    font-size:.88rem;
+}
+
+/* AI */
+
+.ai-demo{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:30px;
+}
+
+.ai-header{
+    padding:18px 24px;
+    border-bottom:1px solid var(--border);
+    font-weight:900;
+}
+
+.ai-body{
+    padding:27px;
+}
+
+.suggestions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:20px;
+}
+
+.suggestion{
+    padding:9px 12px;
+    border:1px solid var(--border);
+    background:var(--bg);
+    border-radius:999px;
+    cursor:pointer;
+    font-size:.8rem;
+}
+
+.ai-input{
+    display:flex;
+    gap:9px;
+}
+
+.ai-input input{
+    flex:1;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px;
+}
+
+.ai-response{
+    display:none;
+    margin-top:18px;
+    padding:20px;
+    border-radius:12px;
+    background:var(--soft);
+}
+
+/* FINAL */
+
+.final{
+    text-align:center;
+}
+
+.final h2{
+    font-size:clamp(2.8rem,6vw,6rem);
+    line-height:.94;
+    letter-spacing:-.07em;
+}
+
+.final-system{
+    margin-top:45px;
+    padding:35px;
+    background:var(--dark);
+    color:white;
+    border-radius:20px;
+    text-align:left;
+}
+
+.final-flow{
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:7px;
+    margin-top:25px;
+}
+
+.final-step{
+    padding:16px 8px;
+    background:#1b1e23;
+    border:1px solid #2d3137;
+    border-radius:9px;
+    text-align:center;
+    font-size:.68rem;
+    font-weight:900;
+}
+
+footer{
+    background:#0d0f11;
+    color:white;
+    padding:55px 0;
+}
+
+.footer-grid{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+}
+
+footer p{
+    color:#9299a2;
+    margin-top:8px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+    nav{display:none}
+
+    .hero-grid,
+    .module-header,
+    .identity{
+        grid-template-columns:1fr;
+    }
+
+    .source-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .records-grid,
+    .mechanism{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .discovery-flow{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .rule,
+    .open-architecture{
+        grid-template-columns:1fr;
+    }
+
+    .rule-arrow{
+        transform:rotate(90deg);
+    }
+
+    .final-flow{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .hero{
+        padding-top:70px;
+    }
+
+    .source-grid,
+    .records-grid,
+    .mechanism,
+    .discovery-flow,
+    .metric-grid,
+    .example-grid,
+    .final-flow{
+        grid-template-columns:1fr;
+    }
+
+    .hero-actions,
+    .ai-input,
+    .footer-grid{
+        flex-direction:column;
+    }
+
+    section{
+        padding:70px 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+    <div class="logo">OPENOPS <span>/ PLATFORM</span></div>
+
+    <nav>
+        <a href="#architecture">How It Connects</a>
+        <a href="#records">Your Records</a>
+        <a href="#purchasing">Purchasing</a>
+        <a href="#inventory">Inventory</a>
+        <a href="#operations">Operations</a>
+        <a href="#accounting">Accounting</a>
+        <a href="#data">Open Data</a>
+        <a href="#ai">AI</a>
+    </nav>
+
+    <a class="nav-button" href="#architecture">Explore Platform</a>
+</div>
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+<div class="container hero-grid">
+
+<div>
+    <div class="eyebrow">Connected Business Operations + Open Data + AI</div>
+
+    <h1>
+        Connect the business.<br>
+        Understand the work.
+    </h1>
+
+    <p class="hero-copy">
+        OpenOps connects the records, documents and software a company
+        already uses, translates that information into a common business
+        model, and makes it available to workflows, automation, analytics,
+        APIs and AI.
+    </p>
+
+    <div class="explain">
+        <span class="label">What the software actually does</span>
+
+        <p>
+            The platform receives business information through APIs,
+            webhooks, spreadsheets, files, email, documents, database
+            connections and employee input. It identifies what each record
+            represents, connects related records together, applies company
+            rules, records what happened and routes work to the appropriate
+            people or systems.
+        </p>
+
+        <p class="note">
+            (The objective is not to replace every application a company
+            already uses. The platform creates a connected operating and
+            data layer across them.)
+        </p>
+    </div>
+
+    <div class="hero-actions">
+        <a class="button primary" href="#architecture">See the Architecture</a>
+        <a class="button secondary" href="#records">What Does My Company Provide?</a>
+    </div>
+</div>
+
+<div class="dashboard">
+
+    <div class="dashboard-top">
+        <strong>Company Overview</strong>
+        <span class="status">● Systems Connected</span>
+    </div>
+
+    <div class="metric-grid">
+        <div class="metric">
+            <small>Revenue</small>
+            <strong>$481,223</strong>
+        </div>
+
+        <div class="metric">
+            <small>Gross Margin</small>
+            <strong>31.7%</strong>
+        </div>
+
+        <div class="metric">
+            <small>Open Receivables</small>
+            <strong>$127,482</strong>
+        </div>
+
+        <div class="metric">
+            <small>Inventory Value</small>
+            <strong>$603,218</strong>
+        </div>
+    </div>
+
+    <div class="activity">
+        <strong>Live Business Activity</strong>
+
+        <div class="activity-row">
+            <span>Purchase order approved</span>
+            <span>10:42 AM</span>
+        </div>
+
+        <div class="activity-row">
+            <span>Supplier invoice matched</span>
+            <span>10:37 AM</span>
+        </div>
+
+        <div class="activity-row">
+            <span>Customer payment received</span>
+            <span>10:31 AM</span>
+        </div>
+
+        <div class="activity-row">
+            <span>Inventory below reorder point</span>
+            <span>9:54 AM</span>
+        </div>
+    </div>
+
+    <p class="note" style="color:#9ca3ad;">
+        (This view is produced from connected purchasing, inventory,
+        sales and financial records.)
+    </p>
+</div>
+
+</div>
+</section>
+
+
+<!-- MASTER ARCHITECTURE -->
+
+<section class="architecture-section" id="architecture">
+<div class="container">
+
+<div class="section-heading">
+    <div class="eyebrow">01 — The Connection Architecture</div>
+
+    <h2>
+        How does the software actually connect a company?
+    </h2>
+
+    <p>
+        The process begins with the systems and records the company already has.
+        The platform does not assume the information is already organized perfectly.
+    </p>
+</div>
+
+<h3>1. Existing systems and records</h3>
+
+<div class="source-grid" style="margin-top:18px;">
+    <div class="source">ACCOUNTING</div>
+    <div class="source">ERP</div>
+    <div class="source">INVENTORY</div>
+    <div class="source">CRM</div>
+    <div class="source">E-COMMERCE</div>
+    <div class="source">BANKS</div>
+    <div class="source">EMAIL</div>
+    <div class="source">PDFs</div>
+    <div class="source">SPREADSHEETS</div>
+    <div class="source">SHIPPING</div>
+    <div class="source">PAYROLL</div>
+    <div class="source">MANUAL RECORDS</div>
+</div>
+
+<div class="down">↓</div>
+
+<div class="layer white">
+    <h3>2. Connection / Ingestion Layer</h3>
+
+    <p>
+        The platform needs a way to receive information from each source.
+        Different systems require different connection methods.
+    </p>
+
+    <div class="chips">
+        <span class="chip">REST APIs</span>
+        <span class="chip">Webhooks</span>
+        <span class="chip">Database Connectors</span>
+        <span class="chip">CSV Import</span>
+        <span class="chip">Excel Import</span>
+        <span class="chip">Email Ingestion</span>
+        <span class="chip">PDF Upload</span>
+        <span class="chip">Document Extraction</span>
+        <span class="chip">SFTP / Data Feeds</span>
+        <span class="chip">Manual Entry</span>
+    </div>
+
+    <p class="note">
+        (The connector's job is simply to get information from its source
+        into the platform while retaining where that information came from.)
+    </p>
+</div>
+
+<div class="down">↓</div>
+
+<div class="layer soft">
+    <h3>3. Mapping, Validation & Standardization</h3>
+
+    <p>
+        Different applications use different names and structures.
+        The platform translates those differences into a common model.
+    </p>
+
+    <div class="chips">
+        <span class="chip">Vendor → Supplier</span>
+        <span class="chip">Client → Customer</span>
+        <span class="chip">Item → Product</span>
+        <span class="chip">Bill → Supplier Invoice</span>
+        <span class="chip">SKU → Product SKU</span>
+        <span class="chip">Normalize Dates</span>
+        <span class="chip">Validate Amounts</span>
+        <span class="chip">Remove Duplicates</span>
+        <span class="chip">Match Existing Records</span>
+    </div>
+
+    <p class="note">
+        (This is the translation step. The original source record is not
+        simply discarded; the platform retains its source and relationship
+        to the standardized record.)
+    </p>
+</div>
+
+<div class="down">↓</div>
+
+<div class="layer dark">
+    <h3>4. Common Business Data Layer</h3>
+
+    <p>
+        The standardized information becomes connected business objects.
+        The important part is not merely storing the objects—it is understanding
+        their relationships.
+    </p>
+
+    <div class="chips">
+        <span class="chip">Organizations</span>
+        <span class="chip">Users</span>
+        <span class="chip">Suppliers</span>
+        <span class="chip">Customers</span>
+        <span class="chip">Products</span>
+        <span class="chip">Materials</span>
+        <span class="chip">Inventory</span>
+        <span class="chip">Purchase Orders</span>
+        <span class="chip">Sales Orders</span>
+        <span class="chip">Shipments</span>
+        <span class="chip">Invoices</span>
+        <span class="chip">Payments</span>
+        <span class="chip">Documents</span>
+        <span class="chip">Events</span>
+    </div>
+
+    <p class="note" style="color:#939aa4;">
+        (An invoice can now belong to a supplier, relate to a purchase order,
+        correspond to a receiving record and eventually connect to a payment.)
+    </p>
+</div>
+
+<div class="down">↓</div>
+
+<div class="layer white">
+    <h3>5. Events, Rules & Workflows</h3>
+
+    <p>
+        When something changes, the platform records the event and evaluates
+        company-defined rules to determine what should happen next.
+    </p>
+
+    <div class="chips">
+        <span class="chip">PURCHASE_ORDER_CREATED</span>
+        <span class="chip">SHIPMENT_RECEIVED</span>
+        <span class="chip">INVENTORY_CHANGED</span>
+        <span class="chip">INVOICE_RECEIVED</span>
+        <span class="chip">PAYMENT_RECEIVED</span>
+        <span class="chip">ORDER_SHIPPED</span>
+    </div>
+
+    <p class="note">
+        (Events provide the history. Rules decide what workflow should follow.)
+    </p>
+</div>
+
+<div class="down">↓</div>
+
+<div class="layer dark">
+    <h3>6. Automation, Analytics, APIs, Open Data & AI</h3>
+
+    <p>
+        Once the same business information is connected and structured,
+        multiple capabilities can use it without rebuilding the data
+        separately for every application.
+    </p>
+
+    <div class="chips">
+        <span class="chip">Automation</span>
+        <span class="chip">Approvals</span>
+        <span class="chip">Dashboards</span>
+        <span class="chip">Alerts</span>
+        <span class="chip">Reporting</span>
+        <span class="chip">External APIs</span>
+        <span class="chip">Open Historical Data</span>
+        <span class="chip">AI</span>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+<!-- IDENTITY RESOLUTION -->
+
+<section id="identity">
+<div class="container">
+
+<div class="section-heading">
+    <div class="eyebrow">02 — Identity & Source of Truth</div>
+
+    <h2>
+        What if three systems call the same company three different things?
+    </h2>
+
+    <p>
+        Connecting data requires more than importing it. The platform needs
+        to identify when different records refer to the same real business object.
+    </p>
+</div>
+
+<div class="identity">
+
+    <div class="identity-box">
+        <h3>Source Records</h3>
+
+        <div class="identity-record">
+            <strong>Accounting:</strong><br>
+            Vendor #812 — ABC Materials LLC
+        </div>
+
+        <div class="identity-record">
+            <strong>Spreadsheet:</strong><br>
+            Row 146 — ABC Materials
+        </div>
+
+        <div class="identity-record">
+            <strong>PDF Invoice:</strong><br>
+            ABC MAT LLC
+        </div>
+    </div>
+
+    <div style="text-align:center;font-size:2rem;">→</div>
+
+    <div class="identity-box dark">
+        <h3>Canonical Supplier</h3>
+
+        <p style="margin-top:15px;">
+            <strong>Supplier ID:</strong> SUP-00418
+        </p>
+
+        <p>
+            <strong>Name:</strong> ABC Materials LLC
+        </p>
+
+        <p>
+            <strong>Status:</strong> Active
+        </p>
+
+        <p style="margin-top:18px;color:#9fa6af;">
+            Linked source records remain attached so the system knows
+            exactly where each piece of information originated.
+        </p>
+    </div>
+
+</div>
+
+<div class="explain">
+    <span class="label">Why this matters</span>
+
+    <p>
+        The common data layer should preserve provenance. A standardized
+        supplier record should still know which accounting vendor, spreadsheet
+        row, invoice and external-system IDs support it.
+    </p>
+
+    <p class="note">
+        (The system creates a common identity without erasing the original evidence.)
+    </p>
+</div>
+
+</div>
+</section>
+
+
+<!-- WHAT COMPANY PROVIDES -->
+
+<section id="records" style="background:white;">
+<div class="container">
+
+<div class="section-heading">
+    <div class="eyebrow">03 — Company Implementation</div>
+
+    <h2>
+        What does your company already have?
+    </h2>
+
+    <p>
+        A company does not need perfect data before implementation.
+        We first identify the records, systems, people and workflows that already exist.
+    </p>
+</div>
+
+<div class="records-grid">
+
+    <div class="record-card">
+        <h3>Suppliers</h3>
+        <ul>
+            <li>Supplier lists</li>
+            <li>Contacts</li>
+            <li>Terms</li>
+            <li>Contracts</li>
+            <li>Tax documents</li>
+            <li>Product catalogs</li>
+        </ul>
+    </div>
+
+    <div class="record-card">
+        <h3>Purchasing</h3>
+        <ul>
+            <li>Purchase requests</li>
+            <li>Purchase orders</li>
+            <li>Approvals</li>
+            <li>Supplier invoices</li>
+            <li>Receiving records</li>
+            <li>Purchase history</li>
+        </ul>
+    </div>
+
+    <div class="record-card">
+        <h3>Inventory</h3>
+        <ul>
+            <li>SKU lists</li>
+            <li>Material lists</li>
+            <li>Counts</li>
+            <li>Locations</li>
+            <li>Lots / serials</li>
+            <li>Adjustments</li>
+        </ul>
+    </div>
+
+    <div class="record-card">
+        <h3>Operations</h3>
+        <ul>
+            <li>BOMs</li>
+            <li>Work orders</li>
+            <li>Production records</li>
+            <li>Recipes / formulas</li>
+            <li>Labor records</li>
+            <li>Quality records</li>
+        </ul>
+    </div>
+
+    <div class="record-card">
+        <h3>Sales</h3>
+        <ul>
+            <li>Customer lists</li>
+            <li>Quotes</li>
+            <li>Sales orders</li>
+            <li>Price lists</li>
+            <li>Shipments</li>
+            <li>Sales history</li>
+        </ul>
+    </div>
+
+    <div class="record-card">
+        <h3>Accounting</h3>
+        <ul>
+            <li>Bills</li>
+            <li>Invoices</li>
+            <li>Payments</li>
+            <li>Receivables</li>
+            <li>Payables</li>
+            <li>Accounting exports</li>
+        </ul>
+    </div>
+
+    <div class="record-card">
+        <h3>Shipping</h3>
+        <ul>
+            <li>Tracking numbers</li>
+            <li>Carrier records</li>
+            <li>Bills of lading</li>
+            <li>Freight invoices</li>
+            <li>Delivery records</li>
+            <li>Receiving documents</li>
+        </ul>
+    </div>
+
+    <div class="record-card">
+        <h3>Documents</h3>
+        <ul>
+            <li>PDFs</li>
+            <li>Spreadsheets</li>
+            <li>Email attachments</li>
+            <li>Receipts</li>
+            <li>Contracts</li>
+            <li>Certificates</li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="discovery">
+
+    <h3>The implementation begins with discovery.</h3>
+
+    <p>
+        We map how the company actually works before deciding what should be automated.
+    </p>
+
+    <div class="discovery-flow">
+        <div class="discovery-item">What software do you currently use?</div>
+        <div class="discovery-item">What records do you currently keep?</div>
+        <div class="discovery-item">Where does each record live?</div>
+        <div class="discovery-item">Which system is authoritative?</div>
+        <div class="discovery-item">Who creates the information?</div>
+        <div class="discovery-item">Who reviews or approves it?</div>
+        <div class="discovery-item">What happens next?</div>
+        <div class="discovery-item">What work is repeatedly performed by hand?</div>
+    </div>
+
+    <p class="note" style="color:#8f97a1;">
+        (The answers become the company's implementation blueprint.)
+    </p>
+</div>
+
+</div>
+</section>
+
+
+<!-- PURCHASING -->
+
+<section class="module" id="purchasing">
+<div class="container">
+
+<div class="module-header">
+    <div>
+        <div class="module-number">MODULE 01</div>
+        <h2>Purchasing</h2>
+    </div>
+
+    <div class="module-summary">
+        <p>
+            Manage suppliers, purchase requests, purchase orders, approvals,
+            shipments, receiving, invoices and reorder workflows as one
+            connected purchasing process.
+        </p>
+
+        <p class="note">
+            (The objective is to create a complete record of what the company
+            requested, ordered, received, invoiced and paid.)
+        </p>
+    </div>
+</div>
+
+<div class="mechanism">
+
+    <div class="mechanism-card">
+        <small>WHAT ENTERS</small>
+        <h3>Supplier + Need</h3>
+        <p>
+            Supplier records, requested materials, quantities, prices,
+            delivery dates and purchasing requirements enter from existing
+            systems or employee input.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS CREATED</small>
+        <h3>Purchase Order</h3>
+        <p>
+            The platform creates a purchase record connecting the supplier,
+            line items, quantity, price, requester and required approvals.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT RULE RUNS</small>
+        <h3>Approval Policy</h3>
+        <p>
+            Company rules determine who must approve based on amount,
+            department, supplier, item type or other conditions.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT HAPPENS NEXT</small>
+        <h3>Track the Transaction</h3>
+        <p>
+            Shipment, receiving, supplier invoice, exceptions, accounting
+            and payment can remain connected to the original PO.
+        </p>
+    </div>
+
+</div>
+
+<div class="flow">
+    <div class="flow-node">SUPPLIER</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">PURCHASE REQUEST</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">PURCHASE ORDER</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">APPROVAL</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">SHIPMENT</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">RECEIVING</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">INVOICE</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">PAYMENT</div>
+</div>
+
+<div class="example">
+    <h3>Example: the company orders 500 units.</h3>
+
+    <div class="example-grid">
+        <div class="example-box">
+            <small>PURCHASE ORDER</small>
+            <strong>500 units</strong>
+            <p>$20 each / $10,000</p>
+        </div>
+
+        <div class="example-box">
+            <small>RECEIVING</small>
+            <strong>490 units</strong>
+            <p>10 units short</p>
+        </div>
+
+        <div class="example-box">
+            <small>SUPPLIER INVOICE</small>
+            <strong>500 units</strong>
+            <p>$10,000 invoiced</p>
+        </div>
+    </div>
+
+    <div class="exception">
+        <strong>Exception detected:</strong>
+        The company was invoiced for 500 units but only 490 units were recorded as received.
+        The transaction is routed for review instead of silently continuing.
+    </div>
+</div>
+
+<div class="control">
+    <h3>Human control</h3>
+    <p>
+        The software can prepare purchase orders, perform comparisons,
+        recommend reorders and route approvals. The company determines
+        whether purchases, exceptions and payments require employee authorization.
+    </p>
+</div>
+
+<div class="events">
+    <h3>Events created by this workflow</h3>
+
+    <div class="event-list">
+        <span class="event">PURCHASE_REQUEST_CREATED</span>
+        <span class="event">PURCHASE_ORDER_CREATED</span>
+        <span class="event">PURCHASE_ORDER_APPROVED</span>
+        <span class="event">SHIPMENT_CREATED</span>
+        <span class="event">SHIPMENT_RECEIVED</span>
+        <span class="event">INVENTORY_RECEIVED</span>
+        <span class="event">SUPPLIER_INVOICE_RECEIVED</span>
+        <span class="event">INVOICE_EXCEPTION_DETECTED</span>
+        <span class="event">PAYMENT_COMPLETED</span>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+<!-- INVENTORY -->
+
+<section class="module" id="inventory">
+<div class="container">
+
+<div class="module-header">
+    <div>
+        <div class="module-number">MODULE 02</div>
+        <h2>Inventory</h2>
+    </div>
+
+    <div class="module-summary">
+        <p>
+            Maintain a connected record of products, materials, quantities,
+            locations, lots, serial numbers and every movement that changes inventory.
+        </p>
+
+        <p class="note">
+            (Inventory becomes an event-driven record of what exists,
+            where it is and why the quantity changed.)
+        </p>
+    </div>
+</div>
+
+<div class="mechanism">
+
+    <div class="mechanism-card">
+        <small>WHAT ENTERS</small>
+        <h3>Items & Counts</h3>
+        <p>
+            Product lists, SKUs, materials, warehouse locations, opening
+            quantities, lot information and existing inventory records.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS CREATED</small>
+        <h3>Inventory Objects</h3>
+        <p>
+            Each product or material is connected to quantities,
+            locations, lots, serials and inventory transactions.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT CHANGES IT</small>
+        <h3>Inventory Events</h3>
+        <p>
+            Receiving, transfers, consumption, production, sales,
+            returns and adjustments change the recorded quantity.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT RULE RUNS</small>
+        <h3>Reorder / Exception Rules</h3>
+        <p>
+            Thresholds can create reorder recommendations, alerts,
+            count tasks or other workflows.
+        </p>
+    </div>
+
+</div>
+
+<div class="flow">
+    <div class="flow-node">ITEM</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">LOCATION</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">QUANTITY</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">RECEIVE / MOVE</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">USE / PRODUCE</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">SELL</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">CURRENT BALANCE</div>
+</div>
+
+<div class="example">
+    <h3>Example: inventory reaches a reorder threshold.</h3>
+
+    <div class="example-grid">
+        <div class="example-box">
+            <small>CURRENT INVENTORY</small>
+            <strong>95 units</strong>
+        </div>
+
+        <div class="example-box">
+            <small>REORDER POINT</small>
+            <strong>100 units</strong>
+        </div>
+
+        <div class="example-box">
+            <small>RECOMMENDED ORDER</small>
+            <strong>500 units</strong>
+        </div>
+    </div>
+
+    <div class="exception">
+        The platform can create a purchase recommendation using the preferred
+        supplier, historical pricing and lead time. An employee can review it
+        before a purchase order is created.
+    </div>
+</div>
+
+<div class="control">
+    <h3>Human control</h3>
+    <p>
+        Physical inventory still requires reliable real-world capture.
+        Employees can scan, count, receive or adjust inventory while the
+        software records who changed what, when and why.
+    </p>
+</div>
+
+<div class="events">
+    <h3>Events created by this workflow</h3>
+
+    <div class="event-list">
+        <span class="event">INVENTORY_RECEIVED</span>
+        <span class="event">INVENTORY_MOVED</span>
+        <span class="event">INVENTORY_CONSUMED</span>
+        <span class="event">INVENTORY_PRODUCED</span>
+        <span class="event">INVENTORY_ADJUSTED</span>
+        <span class="event">REORDER_POINT_REACHED</span>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+<!-- OPERATIONS -->
+
+<section class="module" id="operations">
+<div class="container">
+
+<div class="module-header">
+    <div>
+        <div class="module-number">MODULE 03</div>
+        <h2>Operations / Production</h2>
+    </div>
+
+    <div class="module-summary">
+        <p>
+            Connect work orders, materials, employees, equipment,
+            production activity, finished products and costs.
+        </p>
+
+        <p class="note">
+            (This connects what the company physically does with the inventory
+            and financial records created by that work.)
+        </p>
+    </div>
+</div>
+
+<div class="mechanism">
+
+    <div class="mechanism-card">
+        <small>WHAT ENTERS</small>
+        <h3>Production Need</h3>
+        <p>
+            Demand, schedules, BOMs, recipes, assemblies, required quantities,
+            materials and production instructions.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS CREATED</small>
+        <h3>Work / Production Order</h3>
+        <p>
+            A production record defines what should be made,
+            how much, what materials are required and where work occurs.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS RECORDED</small>
+        <h3>Actual Activity</h3>
+        <p>
+            Materials consumed, labor, output, waste, completion,
+            quality checks and other operational events.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS CONNECTED</small>
+        <h3>Finished Cost</h3>
+        <p>
+            Actual production activity can connect material,
+            labor and other costs to finished inventory.
+        </p>
+    </div>
+
+</div>
+
+<div class="flow">
+    <div class="flow-node">DEMAND</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">WORK ORDER</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">BOM / MATERIALS</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">PRODUCTION</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">ACTUAL COSTS</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">FINISHED PRODUCT</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">INVENTORY</div>
+</div>
+
+<div class="control">
+    <h3>Human control</h3>
+    <p>
+        Employees record actual production conditions and exceptions.
+        The software connects those records, calculates from approved data
+        and identifies deviations from expected quantities or costs.
+    </p>
+</div>
+
+<div class="events">
+    <h3>Events created by this workflow</h3>
+
+    <div class="event-list">
+        <span class="event">WORK_ORDER_CREATED</span>
+        <span class="event">WORK_ORDER_STARTED</span>
+        <span class="event">MATERIAL_CONSUMED</span>
+        <span class="event">PRODUCTION_RECORDED</span>
+        <span class="event">QUALITY_CHECK_RECORDED</span>
+        <span class="event">WORK_ORDER_COMPLETED</span>
+        <span class="event">FINISHED_INVENTORY_CREATED</span>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+<!-- SALES -->
+
+<section class="module" id="sales">
+<div class="container">
+
+<div class="module-header">
+    <div>
+        <div class="module-number">MODULE 04</div>
+        <h2>Sales</h2>
+    </div>
+
+    <div class="module-summary">
+        <p>
+            Connect customers, products, pricing, orders, fulfillment,
+            shipments, invoices, receivables and payments.
+        </p>
+
+        <p class="note">
+            (The platform creates a connected history from customer demand
+            through the money ultimately collected.)
+        </p>
+    </div>
+</div>
+
+<div class="mechanism">
+
+    <div class="mechanism-card">
+        <small>WHAT ENTERS</small>
+        <h3>Customer + Order</h3>
+        <p>
+            Orders can originate from sales staff, e-commerce,
+            CRM systems, EDI, imports or other connected applications.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS CREATED</small>
+        <h3>Sales Order</h3>
+        <p>
+            Customer, products, quantities, prices, terms,
+            requested dates and fulfillment requirements are connected.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT HAPPENS NEXT</small>
+        <h3>Fulfillment</h3>
+        <p>
+            Inventory allocation, picking, shipping and delivery
+            events can update the order's status.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>FINANCIAL RESULT</small>
+        <h3>Invoice + Payment</h3>
+        <p>
+            The sale can generate an invoice, receivable,
+            payment record and reconciliation workflow.
+        </p>
+    </div>
+
+</div>
+
+<div class="flow">
+    <div class="flow-node">CUSTOMER</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">QUOTE / ORDER</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">INVENTORY</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">FULFILLMENT</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">SHIPMENT</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">INVOICE</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">PAYMENT</div>
+</div>
+
+<div class="control">
+    <h3>Human control</h3>
+    <p>
+        Company policies can determine who may change pricing,
+        issue credits, approve unusual terms, cancel orders or
+        perform other sensitive sales actions.
+    </p>
+</div>
+
+<div class="events">
+    <h3>Events created by this workflow</h3>
+
+    <div class="event-list">
+        <span class="event">CUSTOMER_CREATED</span>
+        <span class="event">SALES_ORDER_CREATED</span>
+        <span class="event">INVENTORY_ALLOCATED</span>
+        <span class="event">ORDER_SHIPPED</span>
+        <span class="event">INVOICE_CREATED</span>
+        <span class="event">PAYMENT_RECEIVED</span>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+<!-- ACCOUNTING -->
+
+<section class="module" id="accounting">
+<div class="container">
+
+<div class="module-header">
+    <div>
+        <div class="module-number">MODULE 05</div>
+        <h2>Accounting</h2>
+    </div>
+
+    <div class="module-summary">
+        <p>
+            Connect financial records to the business activity that produced them
+            and automate repetitive matching, routing and reconciliation work.
+        </p>
+
+        <p class="note">
+            (The platform can work with an existing accounting system rather
+            than requiring the company to replace it.)
+        </p>
+    </div>
+</div>
+
+<div class="mechanism">
+
+    <div class="mechanism-card">
+        <small>WHAT ENTERS</small>
+        <h3>Financial Documents</h3>
+        <p>
+            Supplier invoices, customer invoices, payments,
+            bank transactions, receipts and accounting records.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS IDENTIFIED</small>
+        <h3>Business Context</h3>
+        <p>
+            The platform determines the supplier, customer,
+            order, receiving record or other transaction involved.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS CHECKED</small>
+        <h3>Matching & Exceptions</h3>
+        <p>
+            Amounts, quantities, dates and related records
+            can be compared automatically.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT HAPPENS NEXT</small>
+        <h3>Approval / Sync</h3>
+        <p>
+            Approved records can be routed to the accounting system,
+            payment workflow or reconciliation process.
+        </p>
+    </div>
+
+</div>
+
+<div class="flow">
+    <div class="flow-node">INVOICE</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">EXTRACT</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">IDENTIFY PARTY</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">MATCH RECORDS</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">CHECK EXCEPTIONS</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">APPROVE</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">ACCOUNTING</div>
+</div>
+
+<div class="example">
+    <h3>Example: Accounts Payable</h3>
+
+    <p>
+        A supplier invoice arrives by email. The document processor extracts
+        the supplier, invoice number, date, PO number and amount.
+        The platform identifies the supplier and locates the related purchase
+        order and receiving record.
+    </p>
+
+    <div class="exception">
+        If the PO, receipt and invoice agree, the transaction can continue
+        through the company's normal approval process. If they disagree,
+        the exception is shown to accounting with the supporting records.
+    </div>
+</div>
+
+<div class="control">
+    <h3>Human control</h3>
+
+    <p>
+        Accounting personnel remain responsible for review, corrections,
+        exceptions, approvals and company-specific accounting judgment.
+        Automation reduces searching, re-entry and repetitive comparisons.
+    </p>
+</div>
+
+<div class="events">
+    <h3>Events created by this workflow</h3>
+
+    <div class="event-list">
+        <span class="event">INVOICE_RECEIVED</span>
+        <span class="event">INVOICE_EXTRACTED</span>
+        <span class="event">INVOICE_MATCHED</span>
+        <span class="event">EXCEPTION_DETECTED</span>
+        <span class="event">INVOICE_APPROVED</span>
+        <span class="event">PAYMENT_SCHEDULED</span>
+        <span class="event">PAYMENT_COMPLETED</span>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+<!-- DOCUMENTS -->
+
+<section class="module" id="documents">
+<div class="container">
+
+<div class="module-header">
+    <div>
+        <div class="module-number">MODULE 06</div>
+        <h2>Documents</h2>
+    </div>
+
+    <div class="module-summary">
+        <p>
+            Turn invoices, receipts, contracts, spreadsheets, certificates
+            and other files into records connected to the business objects
+            they support.
+        </p>
+
+        <p class="note">
+            (A document becomes more useful when the system knows what it is,
+            who it belongs to and which transaction it supports.)
+        </p>
+    </div>
+</div>
+
+<div class="mechanism">
+
+    <div class="mechanism-card">
+        <small>WHAT ENTERS</small>
+        <h3>File / Email</h3>
+        <p>
+            PDFs, images, spreadsheets, email attachments and
+            other supported business documents.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS EXTRACTED</small>
+        <h3>Document Data</h3>
+        <p>
+            Dates, parties, invoice numbers, totals,
+            PO numbers and other relevant fields.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS IDENTIFIED</small>
+        <h3>Document Type</h3>
+        <p>
+            Invoice, receipt, contract, certificate,
+            report or another company-defined record type.
+        </p>
+    </div>
+
+    <div class="mechanism-card">
+        <small>WHAT GETS CONNECTED</small>
+        <h3>Business Record</h3>
+        <p>
+            The file can be attached to a supplier,
+            customer, PO, invoice, shipment, payment or other object.
+        </p>
+    </div>
+
+</div>
+
+<div class="flow">
+    <div class="flow-node">PDF / EMAIL / FILE</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">INGEST</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">EXTRACT</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">CLASSIFY</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">MATCH</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">ATTACH</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">SEARCH / RETRIEVE</div>
+</div>
+
+<div class="control">
+    <h3>Human control</h3>
+    <p>
+        Low-confidence extraction or uncertain matches can be routed
+        to an employee for confirmation before the document changes
+        operational records.
+    </p>
+</div>
+
+</div>
+</section>
+
+
+<!-- AUTOMATION -->
+
+<section class="automation" id="automation">
+<div class="container">
+
+<div class="section-heading">
+    <div class="eyebrow">04 — Automation Engine</div>
+
+    <h2>
+        Events tell us what happened. Rules decide what happens next.
+    </h2>
+
+    <p>
+        Automation is built around company-defined triggers,
+        conditions, actions and approval requirements.
+    </p>
+</div>
+
+<div class="rule">
+
+    <div class="rule-box">
+        <small>WHEN</small>
+        <strong>Inventory falls below 100 units</strong>
+        <p class="note" style="color:#8f97a1;">
+            Triggered by INVENTORY_CHANGED.
+        </p>
+    </div>
+
+    <div class="rule-arrow">→</div>
+
+    <div class="rule-box">
+        <small>IF</small>
+        <strong>Item is active and no open PO already covers demand</strong>
+        <p class="note" style="color:#8f97a1;">
+            The system evaluates business conditions.
+        </p>
+    </div>
+
+    <div class="rule-arrow">→</div>
+
+    <div class="rule-box">
+        <small>THEN</small>
+        <strong>Create a purchase recommendation for review</strong>
+        <p class="note" style="color:#8f97a1;">
+            A person can approve creation of the PO.
+        </p>
+    </div>
+
+</div>
+
+<div class="control">
+    <h3>The company defines the boundary.</h3>
+
+    <p>
+        Some workflows may be safe to automate completely.
+        Others may stop at a recommendation, task or approval screen.
+        Permissions and approval rules determine who can authorize sensitive actions.
+    </p>
+</div>
+
+</div>
+</section>
+
+
+<!-- OPEN DATA -->
+
+<section id="data">
+<div class="container">
+
+<div class="section-heading">
+    <div class="eyebrow">05 — Open Historical Data</div>
+
+    <h2>
+        The operational application and historical data layer serve different jobs.
+    </h2>
+
+    <p>
+        Day-to-day transactions require a reliable operational database.
+        Historical events and analytical data can also flow into an open,
+        portable data layer.
+    </p>
+</div>
+
+<div class="open-architecture">
+
+    <div class="open-box">
+        <h3>Operational Layer</h3>
+        <p>
+            Current customers, suppliers, inventory, orders,
+            invoices, payments and workflow state.
+        </p>
+        <p class="note">
+            (Designed for live business transactions.)
+        </p>
+    </div>
+
+    <div class="rule-arrow">→</div>
+
+    <div class="open-box">
+        <h3>Events / Data Pipeline</h3>
+        <p>
+            Changes are captured, transformed and written into
+            historical analytical structures.
+        </p>
+        <p class="note">
+            (Preserves what happened over time.)
+        </p>
+    </div>
+
+    <div class="rule-arrow">→</div>
+
+    <div class="open-box">
+        <h3>Open Data Layer</h3>
+        <p>
+            Historical data can use open table formats and object storage
+            for analytics, BI, external tools, APIs and AI.
+        </p>
+        <p class="note">
+            (Designed to improve portability and reduce unnecessary data lock-in.)
+        </p>
+    </div>
+
+</div>
+
+<div class="explain">
+    <span class="label">Important distinction</span>
+
+    <p>
+        The open analytical layer is not intended to replace the transactional
+        database responsible for safely processing live orders, inventory
+        changes, approvals or payments.
+    </p>
+</div>
+
+</div>
+</section>
+
+
+<!-- AI -->
+
+<section id="ai" style="background:white;">
+<div class="container">
+
+<div class="section-heading">
+    <div class="eyebrow">06 — Business Intelligence + AI</div>
+
+    <h2>
+        AI becomes useful after the business data is connected.
+    </h2>
+
+    <p>
+        Instead of asking AI to guess about the company, authorized AI tools
+        can work with structured purchasing, inventory, operational,
+        sales and financial records.
+    </p>
+</div>
+
+<div class="explain">
+    <span class="label">How this works</span>
+
+    <p>
+        A question such as “Why did our margins fall?” can be translated
+        into searches and calculations across supplier prices, purchase costs,
+        freight, production costs, selling prices, discounts and other
+        authorized records.
+    </p>
+
+    <p class="note">
+        (The answer should be traceable back to the records and calculations
+        supporting it.)
+    </p>
+</div>
+
+<div class="ai-demo" id="demo">
+
+    <div class="ai-header">
+        Business Intelligence Assistant
+    </div>
+
+    <div class="ai-body">
+
+        <div class="suggestions">
+            <button class="suggestion"
+                onclick="askQuestion('Why did our margins fall?')">
+                Why did our margins fall?
+            </button>
+
+            <button class="suggestion"
+                onclick="askQuestion('What inventory needs attention?')">
+                What inventory needs attention?
+            </button>
+
+            <button class="suggestion"
+                onclick="askQuestion('Which invoices are overdue?')">
+                Which invoices are overdue?
+            </button>
+
+            <button class="suggestion"
+                onclick="askQuestion('What changed this week?')">
+                What changed this week?
+            </button>
+        </div>
+
+        <div class="ai-input">
+            <input
+                id="question"
+                type="text"
+                placeholder="Ask a question about the business...">
+
+            <button
+                class="button primary"
+                onclick="submitQuestion()">
+                Ask
+            </button>
+        </div>
+
+        <div class="ai-response" id="response"></div>
+
+        <p class="note">
+            (This front-end demonstration uses simulated responses.
+            A production implementation would query authorized company data.)
+        </p>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+<!-- FINAL SYSTEM -->
+
+<section class="final" id="complete-system">
+<div class="container">
+
+<div class="eyebrow">The Complete System</div>
+
+<h2>
+    Source.<br>
+    Record.<br>
+    Relationship.<br>
+    Event.<br>
+    Rule.<br>
+    Action.
+</h2>
+
+<div class="final-system">
+
+    <h3>Every major workflow follows the same architecture.</h3>
+
+    <p style="margin-top:8px;color:#aeb4bd;">
+        Different departments use different records, but the platform
+        uses the same underlying operating model.
+    </p>
+
+    <div class="final-flow">
+        <div class="final-step">SOURCE</div>
+        <div class="final-step">CONNECT</div>
+        <div class="final-step">STANDARDIZE</div>
+        <div class="final-step">RELATE</div>
+        <div class="final-step">EVENT</div>
+        <div class="final-step">RULE</div>
+        <div class="final-step">ACTION</div>
+        <div class="final-step">HISTORY</div>
+    </div>
+
+    <div class="control">
+        <h3>THE SOFTWARE MOVES AND ORGANIZES THE INFORMATION.</h3>
+
+        <p>
+            People remain responsible for the judgment, review,
+            approvals and business decisions that the company chooses
+            to keep under human control.
+        </p>
+    </div>
+
+</div>
+
+</div>
+</section>
+
+</main>
+
+
+<footer>
+<div class="container footer-grid">
+
+<div>
+    <div class="logo">OPENOPS <span>/ PLATFORM</span></div>
+
+    <p>
+        A connected business operations, automation,
+        open-data and intelligence platform.
+    </p>
+</div>
+
+<div>
+    <strong>Prototype Concept</strong>
+
+    <p>
+        Product name and branding are placeholders.
+    </p>
+</div>
+
+</div>
+</footer>
+
+
+<script>
+/* =========================================================
+   FRONT-END AI DEMONSTRATION
+   ========================================================= */
+
+const demoAnswers = {
+
+    "why did our margins fall?":
+        `The example analysis found three possible contributors:
+        supplier material costs increased 8.4%, average freight cost
+        increased 5.1%, and average selling prices remained relatively
+        stable. Four transactions would be flagged for employee review.`,
+
+    "what inventory needs attention?":
+        `The example analysis found 7 items below their configured reorder
+        points, 2 items with unusually high recent consumption, and 1 item
+        with a receiving discrepancy that has not yet been resolved.`,
+
+    "which invoices are overdue?":
+        `The example analysis found 12 open customer invoices past their
+        due dates. Three are more than 30 days overdue and would be
+        prioritized for review.`,
+
+    "what changed this week?":
+        `The example analysis found increased purchasing costs, 3 new
+        suppliers, 14 completed purchase orders, 2 inventory exceptions,
+        27 customer payments and 4 accounting items awaiting approval.`
+};
+
+function askQuestion(question){
+    document.getElementById("question").value = question;
+    showResponse(question);
+}
+
+function submitQuestion(){
+    const input = document.getElementById("question");
+    const question = input.value.trim();
+
+    if(!question){
+        return;
+    }
+
+    showResponse(question);
+}
+
+function showResponse(question){
+
+    const response = document.getElementById("response");
+
+    const normalized = question.toLowerCase().trim();
+
+    const answer =
+        demoAnswers[normalized] ||
+        `This prototype would send the question to the secure application
+        backend. The backend would determine which authorized business
+        records are relevant, query those records, perform the required
+        calculations and return an answer with supporting evidence.`;
+
+    response.style.display = "block";
+
+    response.innerHTML = `
+        <strong>Question</strong>
+        <p>${escapeHTML(question)}</p>
+
+        <br>
+
+        <strong>Example Analysis</strong>
+        <p>${escapeHTML(answer)}</p>
+
+        <p class="note">
+            (Demonstration data only. A production answer should identify
+            the records and calculations supporting the conclusion.)
+        </p>
+    `;
+}
+
+function escapeHTML(value){
+    return value
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+document
+    .getElementById("question")
+    .addEventListener("keydown",function(event){
+        if(event.key === "Enter"){
+            submitQuestion();
+        }
+    });
+</script>
+
+</body>
+</html>
+```
